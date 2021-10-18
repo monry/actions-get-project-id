@@ -1,0 +1,31 @@
+name: Example
+on:
+  workflow_dispatch:
+    inputs:
+      owner:
+        required: true
+        description: 'User/Organization name project contains.'
+      owner-type:
+        default: 'organization'
+        required: false
+        description: 'Type of owner: user, organization'
+      project-number:
+        default: 0
+        required: true
+        description: 'The number of the target project.'
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get Project Id
+      id: get-project-id
+      uses: ./
+      with:
+        github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        owner: ${{ github.event.inputs.owner }}
+        owner-type: ${{ github.event.inputs.owner-type }}
+        project-number: ${{ github.event.inputs.project-number }}
+    - name: Output result
+      run: |
+        echo '${{ steps.get-project-id.outputs.project-id }}'
