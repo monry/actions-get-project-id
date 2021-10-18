@@ -1,6 +1,9 @@
 name: "Get Project Id"
 author: 'Tetsuya Mori'
 description: 'Get Project Id of GitHub Projects (Beta)'
+branding:
+  icon: hash
+  color: green
 inputs:
   github-token:
     default: ''
