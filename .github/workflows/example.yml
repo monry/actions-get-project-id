@@ -2,10 +2,10 @@ name: Example
 on:
   workflow_dispatch:
     inputs:
-      owner:
+      project-owner:
         required: true
         description: 'User/Organization name project contains.'
-      owner-type:
+      project-owner-type:
         default: 'organization'
         required: false
         description: 'Type of owner: user, organization'
@@ -25,8 +25,8 @@ jobs:
       uses: ./
       with:
         github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        owner: ${{ github.event.inputs.owner }}
-        owner-type: ${{ github.event.inputs.owner-type }}
+        project-owner: ${{ github.event.inputs.project-owner }}
+        project-owner-type: ${{ github.event.inputs.project-owner-type }}
         project-number: ${{ github.event.inputs.project-number }}
     - name: Output result
       run: |
