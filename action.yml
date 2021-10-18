@@ -28,22 +28,23 @@ runs:
     - name: Get Project Id
       uses: actions/github-script@v5
       id: get-project-id
-      result-encoding: string
-      github-token: ${{ inputs.github-token }}
-      script: |
-        const variables = {
-            headers: {
-              'GraphQL-Features': 'projects_next_graphql'
-            }
-        };
-        const query = `
-          query {
-            ${{ inputs.owner-type }}(login: "${{ inputs.owner }}") {
-              projectNext(number: ${{ inputs.project-number }}) {
-                id
+      with:
+        result-encoding: string
+        github-token: ${{ inputs.github-token }}
+        script: |
+          const variables = {
+              headers: {
+                'GraphQL-Features': 'projects_next_graphql'
+              }
+          };
+          const query = `
+            query {
+              ${{ inputs.owner-type }}(login: "${{ inputs.owner }}") {
+                projectNext(number: ${{ inputs.project-number }}) {
+                  id
+                }
               }
             }
-          }
-        `;
-        var result = await github.graphql(query, variables);
-        return result.${{ inputs.owner-type }}.projectNext.id || '';
+          `;
+          var result = await github.graphql(query, variables);
+          return result.${{ inputs.owner-type }}.projectNext.id || '';
