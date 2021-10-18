@@ -5,7 +5,7 @@ inputs:
   github-token:
     default: ''
     required: true
-    description: 'Personal Access Token that with `repo`, `org:read` and `org:write` are granted.'
+    description: 'Personal Access Token that with `org:read` is granted.'
   owner:
     default: ''
     required: true
