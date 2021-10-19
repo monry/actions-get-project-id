@@ -67,10 +67,10 @@ runs:
             }
           }
 
-          if (result.user) {
+          if (result.user && result.user.projectNext) {
             return result.user.projectNext.id;
           }
-          if (result.organization) {
+          if (result.organization && result.organization.projectNext) {
             return result.organization.projectNext.id;
           }
           return '';
