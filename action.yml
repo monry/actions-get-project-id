@@ -42,7 +42,7 @@ runs:
               'GraphQL-Features': 'projects_next_graphql'
             }
           };
-          const query = {
+          const query = `
             query($login: String!, $projectNumber: Int!) {
               user(login: $login) {
                 projectNext(number: $projectNumber) {
@@ -55,8 +55,8 @@ runs:
                 }
               }
             }
-          }
-          
+          `;
+
           var result = await github.graphql(query, variables);
           if (result.user) {
             return result.user.projectNext.id;
