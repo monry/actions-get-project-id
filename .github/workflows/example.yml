@@ -5,10 +5,6 @@ on:
       project-owner:
         required: true
         description: 'User/Organization name project contains.'
-      project-owner-type:
-        default: 'organization'
-        required: false
-        description: 'Type of owner: user, organization'
       project-number:
         default: 0
         required: true
@@ -26,7 +22,6 @@ jobs:
       with:
         github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         project-owner: ${{ github.event.inputs.project-owner }}
-        project-owner-type: ${{ github.event.inputs.project-owner-type }}
         project-number: ${{ github.event.inputs.project-number }}
     - name: Output result
       run: |
