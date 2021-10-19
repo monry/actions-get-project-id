@@ -57,7 +57,16 @@ runs:
             }
           `;
 
-          var result = await github.graphql(query, variables);
+          var result = {};
+
+          try {
+            result = await github.graphql(query, variables);
+          } catch (error) {
+            if (error.data) {
+              result = error.data;
+            }
+          }
+
           if (result.user) {
             return result.user.projectNext.id;
           }
