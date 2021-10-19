@@ -70,4 +70,7 @@ runs:
           if (result.user) {
             return result.user.projectNext.id;
           }
-          return result.organization.projectNext.id || '';
+          if (result.organization) {
+            return result.organization.projectNext.id;
+          }
+          return '';
