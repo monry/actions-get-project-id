@@ -13,10 +13,6 @@ inputs:
     default: ''
     required: true
     description: 'User/Organization name project contains.'
-  project-owner-type:
-    default: 'organization'
-    required: false
-    description: 'Type of owner of project: User, Organization'
   project-number:
     default: 0
     required: true
@@ -35,19 +31,46 @@ runs:
         result-encoding: string
         github-token: ${{ inputs.github-token }}
         script: |
+          if ('${{ inputs.project-owner }}'.length == 0 || ${{ inputs.project-number }} <= 0) {
+            return '';
+          }
+
           const variables = {
-              headers: {
-                'GraphQL-Features': 'projects_next_graphql'
-              }
+            login: '${{ inputs.project-owner }}',
+            projectNumber: ${{ inputs.project-number }},
+            headers: {
+              'GraphQL-Features': 'projects_next_graphql'
+            }
           };
           const query = `
-            query {
-              ${{ inputs.project-owner-type }}(login: "${{ inputs.project-owner }}") {
-                projectNext(number: ${{ inputs.project-number }}) {
+            query($login: String!, $projectNumber: Int!) {
+              user(login: $login) {
+                projectNext(number: $projectNumber) {
+                  id
+                }
+              }
+              organization(login: $login) {
+                projectNext(number: $projectNumber) {
                   id
                 }
               }
             }
           `;
-          var result = await github.graphql(query, variables);
-          return result.${{ inputs.project-owner-type }}.projectNext.id || '';
+
+          var result = {};
+
+          try {
+            result = await github.graphql(query, variables);
+          } catch (error) {
+            if (error.data) {
+              result = error.data;
+            }
+          }
+
+          if (result.user && result.user.projectNext) {
+            return result.user.projectNext.id;
+          }
+          if (result.organization && result.organization.projectNext) {
+            return result.organization.projectNext.id;
+          }
+          return '';

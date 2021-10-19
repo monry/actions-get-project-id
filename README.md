@@ -13,13 +13,6 @@ Get node ID of Project (Beta) with Project Number
     # Owner name of project
     project-owner: 'monry'
 
-    # Owner type of project
-    # 
-    # The value can be one of the following: 'user', 'organization'
-    # 
-    # Default: 'organization'
-    project-owner-type: 'user'
-
     # Number of project
     # 
     # The project number is the number shown in the URL or list
@@ -42,15 +35,6 @@ This action requires owner name of project.
 
 Owner name refers to the user name or the organization name.
 
-## `project-owner-type`
-
-Type of owner of project.
-
-The value should be one of the following values.
-
-- `user`
-- `organization` (default)
-
 ## `project-number`
 
 This action requires project number.
@@ -69,7 +53,6 @@ Obtained value stores into output variable named `project-id`.
   with:
     github-token: ${{ secrets.PAT_PROJECT_NEXT }}
     project-owner: 'monry'
-    project-owner-type: 'user'
     project-number: 1
 - run: |
     echo '${{ steps.get-project-id.outputs.project-id }}'
