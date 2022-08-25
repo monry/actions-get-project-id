@@ -1,6 +1,6 @@
 # Get Project Id
 
-Get node ID of Project (Beta) with Project Number
+Get node ID of GitHub Projects with Project Number
 
 # Usage
 
@@ -8,7 +8,7 @@ Get node ID of Project (Beta) with Project Number
 - uses: monry/actions-get-project-id@v1
   with:
     # Personal Access Token that with `org:read` are granted.
-    github-token: ${{ secrets.PAT_PROJECT_NEXT }}
+    github-token: ${{ secrets.PAT_PROJECT_V2 }}
 
     # Owner name of project
     project-owner: 'monry'
@@ -51,7 +51,7 @@ Obtained value stores into output variable named `project-id`.
 - uses: monry/actions-get-project-id@v1
   id: get-project-id # requires `id` to refer output values with after steps
   with:
-    github-token: ${{ secrets.PAT_PROJECT_NEXT }}
+    github-token: ${{ secrets.PAT_PROJECT_V2 }}
     project-owner: 'monry'
     project-number: 1
 - run: |
