@@ -19,4 +19,4 @@ jobs:
         project-number: 3
     - name: Assert
       run: |
-        test '${{ steps.get-project-id.outputs.project-id }}' = 'PVT_kwHOAAzNIc4AFSrF_'
+        test '${{ steps.get-project-id.outputs.project-id }}' = 'PVT_kwHOAAzNIc4AFSrF'
