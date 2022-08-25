@@ -1,0 +1,37 @@
+name: Tests
+on:
+  push:
+    branches:
+      - main
+      - develop
+jobs:
+  test-project-id-if-exists:
+    name: Project Id is returned if exists
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Get Project Id
+      id: get-project-id
+      uses: ./
+      with:
+        github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        project-owner: 'monry'
+        project-number: 3
+    - name: Assert
+      run: |
+        test '${{ steps.get-project-id.outputs.project-id }}' = 'PVT_kwHOAAzNIc4AFSrF'
+  test-empty-if-not-exists:
+    name: Empty string is returned if not exists
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Get Project Id
+      id: get-project-id
+      uses: ./
+      with:
+        github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        project-owner: 'monry'
+        project-number: -1
+    - name: Assert
+      run: |
+        test '${{ steps.get-project-id.outputs.project-id }}' = ''
