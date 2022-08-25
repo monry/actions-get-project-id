@@ -1,6 +1,9 @@
 name: Tests
 on:
   workflow_call:
+    secrets:
+      PERSONAL_ACCESS_TOKEN:
+        required: true
 jobs:
   test-project-id-if-exists:
     name: Project Id is returned if exists
