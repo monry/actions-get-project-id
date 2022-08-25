@@ -6,3 +6,5 @@ jobs:
   tests:
     if: github.event.pull_request.draft == false
     uses: ./.github/workflows/tests.yml
+    secrets:
+      PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
