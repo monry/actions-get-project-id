@@ -1,9 +1,6 @@
 name: Tests
 on:
-  push:
-    branches:
-      - main
-      - develop
+  workflow_call:
 jobs:
   test-project-id-if-exists:
     name: Project Id is returned if exists

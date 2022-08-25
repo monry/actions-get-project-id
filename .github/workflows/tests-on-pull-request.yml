@@ -1,0 +1,8 @@
+name: Tests on PullRequest
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review, synchronize]
+jobs:
+  tests:
+    if: github.event.pull_request.draft == false
+    uses: ./.github/workflows/tests.yml
