@@ -37,10 +37,7 @@ runs:
 
           const variables = {
             login: '${{ inputs.project-owner }}',
-            projectNumber: ${{ inputs.project-number }},
-            headers: {
-              'GraphQL-Features': 'projects_next_graphql'
-            }
+            projectNumber: ${{ inputs.project-number }}
           };
           const query = `
             query($login: String!, $projectNumber: Int!) {
