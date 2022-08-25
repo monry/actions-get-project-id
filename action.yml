@@ -42,12 +42,12 @@ runs:
           const query = `
             query($login: String!, $projectNumber: Int!) {
               user(login: $login) {
-                projectNext(number: $projectNumber) {
+                projectV2(number: $projectNumber) {
                   id
                 }
               }
               organization(login: $login) {
-                projectNext(number: $projectNumber) {
+                projectV2(number: $projectNumber) {
                   id
                 }
               }
@@ -64,10 +64,10 @@ runs:
             }
           }
 
-          if (result.user && result.user.projectNext) {
-            return result.user.projectNext.id;
+          if (result.user && result.user.projectV2) {
+            return result.user.projectV2.id;
           }
-          if (result.organization && result.organization.projectNext) {
-            return result.organization.projectNext.id;
+          if (result.organization && result.organization.projectV2) {
+            return result.organization.projectV2.id;
           }
           return '';
