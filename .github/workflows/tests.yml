@@ -5,8 +5,8 @@ on:
       PERSONAL_ACCESS_TOKEN:
         required: true
 jobs:
-  test-project-id-if-exists:
-    name: Project Id is returned if exists
+  test-project-found:
+    name: Project found
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -20,8 +20,8 @@ jobs:
     - name: Assert
       run: |
         test '${{ steps.get-project-id.outputs.project-id }}' = 'PVT_kwHOAAzNIc4AFSrF'
-  test-empty-if-not-exists:
-    name: Empty string is returned if not exists
+  test-project-not-found:
+    name: Project not found
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -34,4 +34,4 @@ jobs:
         project-number: -1
     - name: Assert
       run: |
-        test '${{ steps.get-project-id.outputs.project-id }}' = ''
+        test '${{ steps.get-project-id.outputs.error }}' = 'Project does not found.'
