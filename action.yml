@@ -20,7 +20,10 @@ inputs:
 outputs:
   project-id:
     description: 'Project Id that can be obtained from a given organization and number'
-    value: ${{ steps.get-project-id.outputs.result }}
+    value: ${{ steps.get-project-id.outputs.project-id }}
+  error:
+    description: 'Error message.'
+    value: ${{ steps.get-project-id.outputs.error }}
 runs:
   using: "composite"
   steps:
@@ -31,10 +34,6 @@ runs:
         result-encoding: string
         github-token: ${{ inputs.github-token }}
         script: |
-          if ('${{ inputs.project-owner }}'.length == 0 || ${{ inputs.project-number }} <= 0) {
-            return '';
-          }
-
           const variables = {
             login: '${{ inputs.project-owner }}',
             projectNumber: ${{ inputs.project-number }}
@@ -65,9 +64,12 @@ runs:
           }
 
           if (result.user && result.user.projectV2) {
-            return result.user.projectV2.id;
+            core.setOutput('project-id', result.user.projectV2.id);
+            return;
           }
           if (result.organization && result.organization.projectV2) {
-            return result.organization.projectV2.id;
+            core.setOutput('project-id', result.organization.projectV2.id);
+            return;
           }
-          return '';
+          core.setOutput('error', 'Project does not found.');
+          return;
