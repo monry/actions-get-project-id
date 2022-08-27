@@ -5,7 +5,7 @@ Get node ID of GitHub Projects with Project Number
 # Usage
 
 ```yaml
-- uses: monry/actions-get-project-id@v1
+- uses: monry/actions-get-project-id@v2
   with:
     # Personal Access Token that with `org:read` are granted.
     github-token: ${{ secrets.PAT_PROJECT_V2 }}
@@ -48,7 +48,7 @@ The project number is the number shown in the URL or list of projects.
 Obtained value stores into output variable named `project-id`.
 
 ```yaml
-- uses: monry/actions-get-project-id@v1
+- uses: monry/actions-get-project-id@v2
   id: get-project-id # requires `id` to refer output values with after steps
   with:
     github-token: ${{ secrets.PAT_PROJECT_V2 }}
