@@ -9,7 +9,7 @@ jobs:
     name: Project found
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Get Project Id
       id: get-project-id
       uses: ./
@@ -24,7 +24,7 @@ jobs:
     name: Project not found
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Get Project Id
       id: get-project-id
       uses: ./
