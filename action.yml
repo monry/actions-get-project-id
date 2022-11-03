@@ -28,7 +28,7 @@ runs:
   using: "composite"
   steps:
     - name: Get Project Id
-      uses: actions/github-script@v5
+      uses: actions/github-script@v6
       id: get-project-id
       with:
         result-encoding: string
